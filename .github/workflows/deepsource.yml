@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # IMPORTANT: for PRs, check out the PR HEAD SHA (not the merge commit),
-      # so the coverage attaches to the commit DeepSource is analysing.
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -46,6 +44,6 @@ jobs:
       - name: Upload coverage to DeepSource
         uses: deepsourcelabs/test-coverage-action@master
         with:
-          key: csharp
+          key: coverage
           coverage-file: ${{ env.COVERAGE_FILE }}
           dsn: ${{ secrets.DEEP_SOURCE_DSN }}
