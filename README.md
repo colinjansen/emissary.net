@@ -4,10 +4,9 @@ Lightweight request/response mediator with CQRS-friendly markers.
 
 ## Install
 
-Reference the project or package:
+Install from Nuget package
 
-- Project reference: `DevHound.Emissary.csproj`
-- Package id: `DevHound.Emissary`
+`dotnet add package DevHound.Emissary`
 
 ## Register
 
