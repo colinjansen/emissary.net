@@ -2,6 +2,9 @@
 
 Lightweight request/response mediator with CQRS-friendly markers.
 
+[![DeepSource](https://app.deepsource.com/gh/colinjansen/emissary.net.svg/?label=code+coverage&show_trend=true&token=lTUko2xbhqyaQxO3nIoaSOIs)](https://app.deepsource.com/gh/colinjansen/emissary.net/)
+[![DeepSource](https://app.deepsource.com/gh/colinjansen/emissary.net.svg/?label=active+issues&show_trend=true&token=lTUko2xbhqyaQxO3nIoaSOIs)](https://app.deepsource.com/gh/colinjansen/emissary.net/)
+
 ## Install
 
 Install from Nuget package
