@@ -1,0 +1,51 @@
+name: deepsource-coverage
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test-coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+      # IMPORTANT: for PRs, check out the PR HEAD SHA (not the merge commit),
+      # so the coverage attaches to the commit DeepSource is analysing.
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Restore
+        run: dotnet restore EmissaryTests/EmissaryTests.csproj
+
+      - name: Test with coverage (Cobertura)
+        run: |
+          dotnet test EmissaryTests/EmissaryTests.csproj \
+            -c Release \
+            --no-restore \
+            --collect:"XPlat Code Coverage" \
+            --results-directory ./test-results
+
+      - name: Locate coverage file
+        shell: bash
+        run: |
+          set -e
+          COVERAGE_FILE="$(ls ./test-results/*/coverage.cobertura.xml | head -n 1)"
+          echo "Found coverage file: $COVERAGE_FILE"
+          echo "COVERAGE_FILE=$COVERAGE_FILE" >> $GITHUB_ENV
+
+      - name: Upload coverage to DeepSource
+        uses: deepsourcelabs/test-coverage-action@master
+        with:
+          key: csharp
+          coverage-file: ${{ env.COVERAGE_FILE }}
+          dsn: ${{ secrets.DEEP_SOURCE_DSN }}

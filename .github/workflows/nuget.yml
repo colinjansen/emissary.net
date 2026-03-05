@@ -1,4 +1,4 @@
-name: publish
+name: nuget
 
 on:
   push:
@@ -21,10 +21,12 @@ jobs:
           dotnet-version: "10.0.x"
 
       - name: Restore
-        run: dotnet restore Emissary.sln
+        run: |
+          dotnet restore EmissaryTests/EmissaryTests.csproj
+          dotnet restore Emissary/Emissary.csproj.csproj
 
       - name: Test
-        run: dotnet test Emissary.sln -c Release --no-restore
+        run: dotnet test test EmissaryTests/EmissaryTests.csproj -c Release --no-restore
 
       - name: Build
         run: dotnet build Emissary/DevHound.Emissary.csproj -c Release --no-restore
