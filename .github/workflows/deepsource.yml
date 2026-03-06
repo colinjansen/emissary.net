@@ -44,6 +44,6 @@ jobs:
       - name: Upload coverage to DeepSource
         uses: deepsourcelabs/test-coverage-action@master
         with:
-          key: coverage
+          key: csharp
           coverage-file: ${{ env.COVERAGE_FILE }}
           dsn: ${{ secrets.DEEP_SOURCE_DSN }}

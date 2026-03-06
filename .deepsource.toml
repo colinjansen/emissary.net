@@ -1,6 +1,5 @@
 version = 1
 
-# Code analyzers
 [[analyzers]]
 name = "csharp"
 enabled = true
@@ -9,7 +8,6 @@ enabled = true
 name = "secrets"
 enabled = true
 
-# Coverage "analyzer" (required for coverage uploads)
 [[analyzers]]
 name = "test-coverage"
 enabled = true
